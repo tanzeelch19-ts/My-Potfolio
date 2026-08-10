@@ -1,0 +1,103 @@
+:root {
+  --color-accent-2: #7dd3fc;
+}
+
+.term-window {
+  border-radius: 1rem;
+  border: 1px solid var(--color-border-strong, #2a2a2a);
+  background: var(--color-surface, #111);
+  overflow: hidden;
+}
+
+.term-window__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--color-border, #1e1e1e);
+}
+
+.term-window.term-window--active {
+  border-color: var(--color-primary, #6ee7b7);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-primary, #6ee7b7) 45%, transparent),
+    0 0 28px color-mix(in srgb, var(--color-primary, #6ee7b7) 22%, transparent);
+}
+
+.term-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  opacity: 0.55;
+}
+
+.status-pulse {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--color-primary, #6ee7b7);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-primary, #6ee7b7) 60%, transparent);
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-primary, #6ee7b7) 55%, transparent); }
+  70% { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.timeline-rail {
+  position: relative;
+  border-left: 1px solid var(--color-border, #1e1e1e);
+}
+
+.timeline-node::before {
+  content: "";
+  position: absolute;
+  left: -0.3125rem;
+  top: 0.4rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--color-primary, #6ee7b7);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary, #6ee7b7) 15%, transparent);
+}
+
+.project-preview {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.preview-a {
+  background:
+    radial-gradient(120% 100% at 15% 15%, color-mix(in srgb, var(--color-primary, #6ee7b7) 30%, transparent), transparent 60%),
+    radial-gradient(100% 100% at 85% 85%, color-mix(in srgb, var(--color-accent-2) 22%, transparent), transparent 65%),
+    var(--color-bg-alt, #0d0d0d);
+}
+
+.preview-b {
+  background:
+    radial-gradient(110% 90% at 85% 15%, color-mix(in srgb, var(--color-accent-2) 28%, transparent), transparent 60%),
+    radial-gradient(100% 100% at 10% 90%, color-mix(in srgb, var(--color-primary, #6ee7b7) 20%, transparent), transparent 65%),
+    var(--color-bg-alt, #0d0d0d);
+}
+
+.preview-c {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--color-primary, #6ee7b7) 22%, transparent), transparent 55%),
+    linear-gradient(315deg, color-mix(in srgb, var(--color-accent-2) 22%, transparent), transparent 55%),
+    var(--color-bg-alt, #0d0d0d);
+}
+
+.preview-icon {
+  color: color-mix(in srgb, var(--color-primary, #6ee7b7) 85%, white 15%);
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--color-primary, #6ee7b7) 45%, transparent));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-pulse { animation: none; }
+}

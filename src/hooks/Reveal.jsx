@@ -1,4 +1,4 @@
-import useReveal from './UseReveal';
+import useReveal from './useReveal';
 
 export default function Reveal({ children, className = '', as = 'div' }) {
   const [ref, visible] = useReveal();

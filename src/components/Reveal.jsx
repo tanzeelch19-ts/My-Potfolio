@@ -1,12 +1,13 @@
 import useReveal from '../hooks/useReveal';
 
-export default function Reveal({ children, className = '', as = 'div' }) {
+export default function Reveal({ children, className = '', as = 'div', delay = 0 }) {
   const [ref, visible] = useReveal();
   const Tag = as;
 
   return (
     <Tag
       ref={ref}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
       className={`transition-all duration-700 ease-out ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
       } ${className}`}

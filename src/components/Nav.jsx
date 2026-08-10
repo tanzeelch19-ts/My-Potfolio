@@ -4,6 +4,7 @@ const LINKS = [
   { id: 'home', label: 'home' },
   { id: 'about', label: 'about' },
   { id: 'skills', label: 'skills' },
+  { id: 'timeline', label: 'log' },
   { id: 'projects', label: 'projects' },
   { id: 'contact', label: 'contact' },
 ];
@@ -30,10 +31,10 @@ export default function Nav() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 h-19 flex items-center z-50 bg-bg/70 backdrop-blur-md border-b border-border">
-     <div className="w-full max-w-280 mx-auto px-6 flex items-center justify-between">
-  <a href="#home" className="font-display font-semibold text-[21px] tracking-tight">
-    Ch Tanzeel<span className="text-primary">.</span>
-  </a>
+      <div className="w-full max-w-280 mx-auto px-6 flex items-center justify-between">
+        <a href="#home" className="font-display font-semibold text-[21px] tracking-tight">
+          Ch Tanzeel<span className="text-primary">.</span>
+        </a>
 
         <ul
           className={`${open ? 'flex' : 'hidden'} flex-col gap-6 absolute top-19 left-0 right-0 bg-bg/95 backdrop-blur-md border-b border-border p-6 z-40 md:static md:flex md:flex-row md:items-center md:gap-9 md:p-0 md:bg-transparent md:border-none font-mono text-sm`}

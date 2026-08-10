@@ -22,19 +22,27 @@ export default function About() {
 
         <div className="grid md:grid-cols-[280px_1fr] gap-12 md:gap-20 items-start">
           {/* Replace with: <img src="/your-photo.jpg" className="w-full h-full object-cover rounded-3xl" /> */}
-          <Reveal className="group relative aspect-square w-55 md:w-full rounded-3xl border border-border-strong bg-linear-to-br from-surface to-bg-alt shadow-glow overflow-hidden transition-transform duration-500 hover:-translate-y-1 hover:shadow-glow-strong">
-            <div className="pointer-events-none absolute -top-10 -right-10 w-32 h-32 rounded-full bg-primary/20 blur-2xl transition-opacity duration-500 group-hover:opacity-80" />
-            <div className="pointer-events-none absolute -bottom-12 -left-8 w-28 h-28 rounded-full bg-primary/10 blur-2xl" />
+          <Reveal className="term-window group relative w-55 md:w-full shadow-glow transition-transform duration-500 hover:-translate-y-1 hover:shadow-glow-strong">
+            <div className="term-window__bar">
+              <span className="term-dot" style={{ background: '#f87171' }} />
+              <span className="term-dot" style={{ background: '#fbbf24' }} />
+              <span className="term-dot" style={{ background: '#6ee7b7' }} />
+              <span className="ml-auto font-mono text-[10px] text-ink-dim">about.tsx</span>
+            </div>
+            <div className="relative aspect-square bg-linear-to-br from-surface to-bg-alt overflow-hidden">
+              <div className="pointer-events-none absolute -top-10 -right-10 w-32 h-32 rounded-full bg-primary/20 blur-2xl transition-opacity duration-500 group-hover:opacity-80" />
+              <div className="pointer-events-none absolute -bottom-12 -left-8 w-28 h-28 rounded-full bg-primary/10 blur-2xl" />
 
-            <div className="relative w-full h-full flex items-center justify-center">
-              <span className="font-display font-semibold text-7xl md:text-8xl text-primary/90 tracking-tight -rotate-3 transition-transform duration-500 group-hover:rotate-0 group-hover:scale-105">
-                CT
+              <div className="relative w-full h-full flex items-center justify-center">
+                <span className="font-display font-semibold text-7xl md:text-8xl text-primary/90 tracking-tight -rotate-3 transition-transform duration-500 group-hover:rotate-0 group-hover:scale-105">
+                  CT
+                </span>
+              </div>
+
+              <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-dim tracking-widest">
+                <span className="status-pulse" /> AVAILABLE
               </span>
             </div>
-
-            <span className="absolute bottom-4 left-4 font-mono text-[11px] text-ink-dim tracking-widest">
-              PORTFOLIO
-            </span>
           </Reveal>
 
           <Reveal>

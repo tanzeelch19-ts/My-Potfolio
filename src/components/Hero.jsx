@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import useMagnetic from '../hooks/useMagnetic';
 
 const ROLES = ['Frontend Developer', 'UI Engineer', 'Creative Coder'];
 
@@ -73,6 +74,8 @@ function useTypedRole(startAfter) {
 export default function Hero() {
   const [whoami, whoamiDone] = useTypedText('whoami', 90, 400);
   const role = useTypedRole(whoamiDone);
+  const magnetPrimary = useMagnetic(0.2);
+  const magnetSecondary = useMagnetic(0.2);
 
   return (
     <header
@@ -81,7 +84,7 @@ export default function Hero() {
     >
       <div className="pointer-events-none absolute -top-24 -right-24 w-140 h-140 rounded-full bg-primary/10 blur-3xl" />
 
-      <div className="w-full max-w-280 mx-auto px-6">
+      <div className="w-full max-w-280 mx-auto px-6 relative">
         <div className="max-w-190">
           <p className="font-mono text-sm text-ink-muted mb-5">
             <span className="text-primary">Ch Tanzeel@portfolio:~$</span> {whoami}
@@ -104,14 +107,16 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-4">
             <a
+              ref={magnetPrimary}
               href="#projects"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm bg-primary text-ink-onprimary shadow-glow hover:bg-primary-soft hover:shadow-glow-strong transition-all hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm bg-primary text-ink-onprimary shadow-glow hover:bg-primary-soft hover:shadow-glow-strong transition-transform duration-150"
             >
               View projects
             </a>
             <a
+              ref={magnetSecondary}
               href="#contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm border border-border-strong text-ink hover:border-primary hover:text-primary transition-all hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm border border-border-strong text-ink hover:border-primary hover:text-primary transition-transform duration-150"
             >
               Get in touch
             </a>
