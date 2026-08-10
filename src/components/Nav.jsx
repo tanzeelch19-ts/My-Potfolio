@@ -33,7 +33,7 @@ export default function Nav() {
     <nav className="fixed top-0 left-0 right-0 h-19 flex items-center z-50 bg-bg/70 backdrop-blur-md border-b border-border">
       <div className="w-full max-w-280 mx-auto px-6 flex items-center justify-between">
         <a href="#home" className="font-display font-semibold text-[21px] tracking-tight">
-          Ch Tanzeel<span className="text-primary">.</span>
+          Ch Tanzeel <span className="text-primary">.Potfolio</span>
         </a>
 
         <ul
