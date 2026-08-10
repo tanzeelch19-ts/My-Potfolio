@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './styles/overHaul.css';
+// import './styles/overHaul.css';
 import Nav from './components/Nav';
 import ScrollProgress from './components/ScrollProgress';
 import Hero from './components/Hero';
