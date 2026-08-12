@@ -48,7 +48,7 @@ export default function Projects() {
                 </span>
               </div>
               {/* preview */}
-              <div className="h-[160px] overflow-hidden bg-paper dark:bg-ink-700">
+              <div className="h-40 overflow-hidden bg-paper dark:bg-ink-700">
                 <img
                   src={p.image}
                   alt={`${p.name} screenshot`}

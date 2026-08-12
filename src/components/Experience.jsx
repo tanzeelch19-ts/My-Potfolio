@@ -13,7 +13,7 @@ export default function Experience() {
             delay={i * 100}
             className="relative pb-8 last:pb-0"
           >
-            <span className="absolute -left-[31px] top-1 w-2.5 h-2.5 rounded-full bg-amber" />
+            <span className="absolute -left-7.75 top-1 w-2.5 h-2.5 rounded-full bg-amber" />
             <div className="flex items-center gap-2 mb-1">
               <Briefcase size={15} className="text-amber" />
               <h3 className="font-semibold text-ink-900 dark:text-paper">
