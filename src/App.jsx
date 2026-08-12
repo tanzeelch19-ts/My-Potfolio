@@ -67,7 +67,7 @@ export default function App() {
         <Projects />
         <Education />
         <Experience />
-        <GithubStats />
+        <GitStats />
         <Contact />
         <Footer />
         <ScrollTop />
