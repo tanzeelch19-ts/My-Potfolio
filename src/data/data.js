@@ -71,13 +71,7 @@ export const ALL_TAGS = [
   ...Array.from(new Set(PROJECTS.flatMap((p) => p.tech))),
 ];
 
-export const EDUCATION = [
-  {
-    degree: "[Your Degree — e.g. BS Computer Science]",
-    institute: "[Your Institute Name]",
-    period: "[Start] — [End]",
-  },
-];
+
 
 export const CERTIFICATIONS = [
   "[Add a relevant course or certification]",
@@ -96,5 +90,13 @@ export const EXPERIENCE = [
     period: "Ongoing",
     description:
       "Task Management Dashboard, Movie Explorer, and E-Commerce Store — built end-to-end with React.",
+  },
+];
+
+export const EDUCATION = [
+  {
+    degree: "ICS (Intermediate in Computer Science)",
+    institute: "Punjab College",
+    period: "2 years",
   },
 ];

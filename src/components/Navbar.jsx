@@ -26,10 +26,14 @@ export default function Navbar({ darkMode, setDarkMode }) {
       <nav className="flex items-center justify-between px-4 py-3 max-w-6xl mx-auto">
         <button
           onClick={() => scrollTo("home")}
-          className="font-display font-semibold text-lg flex items-center gap-2 text-ink-900 dark:text-paper"
+          className="group font-display font-semibold text-lg flex items-center gap-2 text-ink-900 dark:text-paper"
         >
-          <Terminal size={20} className="text-amber" />
-          Ch Tanzeel
+          <span className="w-8 h-8 rounded-md bg-amber/10 flex items-center justify-center transition-colors group-hover:bg-amber/20">
+            <Terminal size={16} className="text-amber" />
+          </span>
+          <span className="transition-colors group-hover:text-amber">
+            Ch Tanzeel
+          </span>
         </button>
 
         <ul className="hidden md:flex items-center gap-1">
@@ -37,9 +41,10 @@ export default function Navbar({ darkMode, setDarkMode }) {
             <li key={link.id}>
               <button
                 onClick={() => scrollTo(link.id)}
-                className="font-mono text-sm px-3 py-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-amber dark:hover:text-amber-bright transition-colors"
+                className="font-mono text-sm px-3 py-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-amber dark:hover:text-amber-bright transition-colors relative group"
               >
                 {link.label}
+                <span className="absolute left-3 right-3 -bottom-0.5 h-px bg-amber scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200" />
               </button>
             </li>
           ))}
@@ -49,14 +54,14 @@ export default function Navbar({ darkMode, setDarkMode }) {
           <button
             onClick={() => setDarkMode((d) => !d)}
             aria-label="Toggle theme"
-            className="p-2 rounded-md border border-paper-line dark:border-ink-line text-amber transition-colors"
+            className="p-2 rounded-md border border-paper-line dark:border-ink-line text-amber hover:border-amber transition-colors"
           >
             {darkMode ? <Sun size={16} /> : <Moon size={16} />}
           </button>
           <button
             onClick={() => setMenuOpen((m) => !m)}
             aria-label="Toggle menu"
-            className="md:hidden p-2 rounded-md border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper"
+            className="md:hidden p-2 rounded-md border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper hover:border-amber transition-colors"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -69,7 +74,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
             <button
               key={link.id}
               onClick={() => scrollTo(link.id)}
-              className="font-mono text-sm py-2 text-left text-gray-500 dark:text-gray-400"
+              className="font-mono text-sm py-2.5 text-left text-gray-500 dark:text-gray-400 hover:text-amber transition-colors"
             >
               {link.label}
             </button>

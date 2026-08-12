@@ -44,13 +44,13 @@ export default function Hero() {
         <p className="font-mono text-sm mb-4 text-gray-500 dark:text-gray-400 relative z-10">
           <span className="text-amber">~/portfolio</span> $ whoami
         </p>
-        <h1 className="font-display text-4xl md:text-6xl font-bold leading-tight text-ink-900 dark:text-paper relative z-10">
+        <h2 className="font-mono text-lg md:text-xl font-medium text-ink-900 dark:text-paper relative z-10">
           {typed}
           <span className="text-amber animate-blink">_</span>
-        </h1>
-        <p className="font-mono text-lg md:text-xl mt-3 text-amber relative z-10">
+        </h2>
+        <h1 className="font-display text-4xl md:text-6xl font-bold leading-tight mt-2 text-amber relative z-10">
           Frontend Developer / React Developer
-        </p>
+        </h1>
         <p className="max-w-2xl mt-5 text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-400 relative z-10">
           I build clean, responsive web interfaces with React and modern
           tooling — turning ideas into fast, usable products from Bahawalpur,

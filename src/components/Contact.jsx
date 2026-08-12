@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Download, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Download, Send, Check } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Section from "./Section.jsx";
 import { SOCIALS } from "../data/data.js";
 
 function ContactRow({ icon, label, href }) {
   const content = (
-    <div className="flex items-center gap-3">
-      <span className="p-2 rounded-md bg-paper dark:bg-ink-700 text-amber">
+    <div className="group flex items-center gap-3 p-3 rounded-lg glass hover-lift">
+      <span className="w-9 h-9 rounded-lg bg-amber/10 flex items-center justify-center text-amber shrink-0 transition-colors group-hover:bg-amber/20">
         {icon}
       </span>
-      <span className="text-sm text-ink-900 dark:text-paper">{label}</span>
+      <span className="text-sm text-ink-900 dark:text-paper truncate transition-colors group-hover:text-amber">
+        {label}
+      </span>
     </div>
   );
   return href ? (
@@ -18,7 +20,7 @@ function ContactRow({ icon, label, href }) {
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel="noopener noreferrer"
-      className="block hover:opacity-80 transition-opacity"
+      className="block"
     >
       {content}
     </a>
@@ -28,7 +30,8 @@ function ContactRow({ icon, label, href }) {
 }
 
 export default function Contact() {
-  const [formStatus, setFormStatus] = useState(null);
+  const [formStatus, setFormStatus] = useState(null); // null | "error" | "sending" | "sent"
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,37 +39,68 @@ export default function Contact() {
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
-    if (!name || !email || !message) {
+
+    const errors = {};
+    if (!name) errors.name = true;
+    if (!email) errors.email = true;
+    if (!message) errors.message = true;
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
       setFormStatus("error");
       return;
     }
+
+    setFieldErrors({});
+    setFormStatus("sending");
+
     const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
     const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-    window.location.href = `mailto:${SOCIALS.email}?subject=${subject}&body=${body}`;
-    setFormStatus("sent");
+
+    setTimeout(() => {
+      window.location.href = `mailto:${SOCIALS.email}?subject=${subject}&body=${body}`;
+      setFormStatus("sent");
+    }, 400);
   };
+
+  const inputClass = (field) =>
+    `font-mono w-full px-3 py-2.5 rounded-md text-sm outline-none bg-paper dark:bg-ink-700 border transition-colors ${
+      fieldErrors[field]
+        ? "border-red-400 dark:border-red-500"
+        : "border-paper-line dark:border-ink-line focus:border-amber"
+    } text-ink-900 dark:text-paper`;
 
   return (
     <Section id="contact" eyebrow="07" title="Contact">
       <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <ContactRow icon={<Mail size={16} />} label={SOCIALS.email} href={`mailto:${SOCIALS.email}`} />
-          <ContactRow icon={<Phone size={16} />} label={SOCIALS.phone} href={`tel:${SOCIALS.phone.replace(/\s/g, "")}`} />
+        <div className="space-y-3">
+          <ContactRow
+            icon={<Mail size={16} />}
+            label={SOCIALS.email}
+            href={`mailto:${SOCIALS.email}`}
+          />
+          <ContactRow
+            icon={<Phone size={16} />}
+            label={SOCIALS.phone}
+            href={`tel:${SOCIALS.phone.replace(/\s/g, "")}`}
+          />
           <ContactRow icon={<MapPin size={16} />} label="Bahawalpur, Punjab, Pakistan" />
-          <ContactRow icon={<FaGithub size={16} />} label="github.com/tanzeelch19-ts" href={SOCIALS.github} />
+          <ContactRow
+            icon={<FaGithub size={16} />}
+            label="github.com/tanzeelch19-ts"
+            href={SOCIALS.github}
+          />
           <ContactRow icon={<FaLinkedin size={16} />} label="LinkedIn" href={SOCIALS.linkedin} />
-          <a
+<a
+          
             href="/resume.pdf"
-            className="font-mono text-sm inline-flex items-center gap-2 mt-2 px-4 py-2.5 rounded-md border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper hover:border-amber transition-colors"
+            className="font-mono text-sm inline-flex items-center gap-2 mt-2 px-4 py-2.5 rounded-md border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper hover:border-amber hover:text-amber transition-colors"
           >
             <Download size={15} /> Download CV
           </a>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="rounded-lg p-5 glass hover-lift"
-        >
+        <form onSubmit={handleSubmit} className="rounded-lg p-5 glass hover-lift">
           <p className="font-mono text-xs mb-4 text-gray-500 dark:text-gray-400">
             <span className="text-amber">$</span> send --message
           </p>
@@ -74,29 +108,45 @@ export default function Contact() {
             <input
               name="name"
               placeholder="Your name"
-              className="font-mono w-full px-3 py-2.5 rounded-md text-sm outline-none bg-paper dark:bg-ink-700 border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper focus:border-amber transition-colors"
+              className={inputClass("name")}
+              onChange={() => setFieldErrors((f) => ({ ...f, name: false }))}
             />
             <input
               name="email"
               type="email"
               placeholder="Your email"
-              className="font-mono w-full px-3 py-2.5 rounded-md text-sm outline-none bg-paper dark:bg-ink-700 border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper focus:border-amber transition-colors"
+              className={inputClass("email")}
+              onChange={() => setFieldErrors((f) => ({ ...f, email: false }))}
             />
             <textarea
               name="message"
               placeholder="Your message"
               rows={4}
-              className="font-mono w-full px-3 py-2.5 rounded-md text-sm outline-none resize-none bg-paper dark:bg-ink-700 border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper focus:border-amber transition-colors"
+              className={`${inputClass("message")} resize-none`}
+              onChange={() => setFieldErrors((f) => ({ ...f, message: false }))}
             />
+
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-md font-medium bg-amber text-ink-900 hover:bg-amber-bright transition-colors"
+              disabled={formStatus === "sending"}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-md font-medium bg-amber text-ink-900 hover:bg-amber-bright transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Send Message <Send size={15} />
+              {formStatus === "sent" ? (
+                <>
+                  Message Ready <Check size={15} />
+                </>
+              ) : formStatus === "sending" ? (
+                "Preparing…"
+              ) : (
+                <>
+                  Send Message <Send size={15} />
+                </>
+              )}
             </button>
+
             {formStatus === "error" && (
               <p className="text-xs text-red-500">
-                Please fill in every field before sending.
+                Please fill in the highlighted field{Object.keys(fieldErrors).length > 1 ? "s" : ""}.
               </p>
             )}
             {formStatus === "sent" && (
