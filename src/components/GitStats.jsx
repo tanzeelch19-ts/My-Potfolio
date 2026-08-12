@@ -6,7 +6,7 @@ import { SOCIALS } from "../data.js";
 
 const USERNAME = "tanzeelch19-ts";
 
-export default function GithubStats() {
+export default function GitStats() {
   const [statsError, setStatsError] = useState(false);
 
   return (

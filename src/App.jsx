@@ -6,7 +6,7 @@ import Skills from "./components/Skills.jsx";
 import Projects from "./components/Projects.jsx";
 import Education from "./components/Education.jsx";
 import Experience from "./components/Experience.jsx";
-import GithubStats from "./components/GithubStats.jsx";
+import GitStats from "./components/GitStats.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 import ScrollTop from "./components/ScrollTop.jsx";
