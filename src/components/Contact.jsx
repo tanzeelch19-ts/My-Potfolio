@@ -4,6 +4,8 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Section from "./Section.jsx";
 import { SOCIALS } from "../data/data.js";
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xxxxxxxx"; // replace with your ID
+
 function ContactRow({ icon, label, href }) {
   const content = (
     <div className="group flex items-center gap-3 p-3 rounded-lg glass hover-lift">
@@ -30,10 +32,10 @@ function ContactRow({ icon, label, href }) {
 }
 
 export default function Contact() {
-  const [formStatus, setFormStatus] = useState(null); // null | "error" | "sending" | "sent"
+  const [formStatus, setFormStatus] = useState(null); // null | "error" | "sending" | "sent" | "failed"
   const [fieldErrors, setFieldErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value.trim();
@@ -54,13 +56,22 @@ export default function Contact() {
     setFieldErrors({});
     setFormStatus("sending");
 
-    const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
 
-    setTimeout(() => {
-      window.location.href = `mailto:${SOCIALS.email}?subject=${subject}&body=${body}`;
-      setFormStatus("sent");
-    }, 400);
+      if (res.ok) {
+        setFormStatus("sent");
+        form.reset();
+      } else {
+        setFormStatus("failed");
+      }
+    } catch {
+      setFormStatus("failed");
+    }
   };
 
   const inputClass = (field) =>
@@ -133,10 +144,10 @@ export default function Contact() {
             >
               {formStatus === "sent" ? (
                 <>
-                  Message Ready <Check size={15} />
+                  Sent <Check size={15} />
                 </>
               ) : formStatus === "sending" ? (
-                "Preparing…"
+                "Sending…"
               ) : (
                 <>
                   Send Message <Send size={15} />
@@ -151,7 +162,12 @@ export default function Contact() {
             )}
             {formStatus === "sent" && (
               <p className="text-xs text-amber">
-                Opening your email app to send this message…
+                Message sent — I'll get back to you soon.
+              </p>
+            )}
+            {formStatus === "failed" && (
+              <p className="text-xs text-red-500">
+                Something went wrong. Please email me directly instead.
               </p>
             )}
           </div>
