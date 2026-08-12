@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import Section from "./Section.jsx";
-import { SOCIALS } from "../data.js";
+import { SOCIALS } from "../data/data.js";
 
 const USERNAME = "tanzeelch19-ts";
 
