@@ -1,29 +1,28 @@
-import { ArrowUpIcon } from './Icons';
+import { Mail, Terminal } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SOCIALS } from "../data/data.js";
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-
-  const scrollToTop = () => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-  };
-
   return (
-    <footer className="border-t border-border py-8">
-      <div className="w-full max-w-280 mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
-        <div className="font-mono text-sm text-ink-dim">
-          Ch Tanzeel<span className="text-primary">.</span>
+    <footer className="mt-12 py-8 px-4 border-t border-paper-line dark:border-ink-line">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span className="font-display font-semibold flex items-center gap-2 text-ink-900 dark:text-paper">
+          <Terminal size={16} className="text-amber" /> Ch Tanzeel
+        </span>
+        <div className="flex items-center gap-4 text-gray-500 dark:text-gray-400">
+          <a href={SOCIALS.github} target="_blank" rel="noopener noreferrer" className="hover:text-amber transition-colors">
+            <FaGithub size={17} />
+          </a>
+          <a href={SOCIALS.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-amber transition-colors">
+            <FaLinkedin size={17} />
+          </a>
+          <a href={`mailto:${SOCIALS.email}`} className="hover:text-amber transition-colors">
+            <Mail size={17} />
+          </a>
         </div>
-        <div className="flex items-center gap-5 font-mono text-[13px] text-ink-dim">
-          <span>© {year} Ch Tanzeel</span>
-          <button
-            aria-label="Back to top"
-            onClick={scrollToTop}
-            className="w-8.5 h-8.5 rounded-full border border-border text-ink-muted flex items-center justify-center hover:border-primary hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
-          >
-            <ArrowUpIcon />
-          </button>
-        </div>
+        <p className="font-mono text-xs text-gray-500 dark:text-gray-400">
+          © {new Date().getFullYear()} Ch Tanzeel. Built with React &amp; Tailwind.
+        </p>
       </div>
     </footer>
   );

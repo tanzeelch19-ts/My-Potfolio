@@ -1,70 +1,33 @@
-import Reveal from './Reveal';
+import Section from "./Section.jsx";
+import Reveal from "./Reveal.jsx";
 
-const CATEGORIES = [
-  { title: 'Languages', items: ['JavaScript', 'TypeScript', 'HTML', 'CSS'] },
-  {
-    title: 'Frameworks & Libraries',
-    items: ['React', 'Next.js', 'Vue', 'Tailwind CSS', 'Framer Motion'],
-  },
-  { title: 'Tools & Platforms', items: ['Git', 'Figma', 'Vite', 'Docker', 'Vercel'] },
-];
 
-export default function Skills({ activeSkill = null, onSelectSkill = () => {} }) {
+import { SKILLS } from "../data/data.js";
+export default function Skills() {
   return (
-    <section id="skills" className="scroll-mt-19 py-24 md:py-32 border-t border-border bg-bg-alt">
-      <div className="w-full max-w-280 mx-auto px-6">
-        <Reveal className="max-w-155 mb-14">
-          <div className="inline-flex items-center gap-2 font-mono text-sm text-primary mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-glow" />
-            &lt;skills&gt;
-          </div>
-          <h2 className="font-display font-semibold text-[28px] md:text-[40px] mb-3">Toolbox</h2>
-          <p className="text-ink-muted text-[17px]">
-            What I reach for most, day to day. Tap one to see it in action below.
-          </p>
-        </Reveal>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {CATEGORIES.map((cat, i) => (
-            <Reveal
-              key={cat.title}
-              as="div"
-              delay={i * 100}
-              className="p-7 rounded-2xl border border-border bg-surface hover:border-border-strong hover:-translate-y-1 transition-transform"
-            >
-              <h3 className="font-display text-[17px] mb-4">{cat.title}</h3>
-              <ul className="flex flex-wrap gap-2">
-                {cat.items.map((item) => {
-                  const isActive = activeSkill === item;
-                  return (
-                    <li key={item}>
-                      <button
-                        type="button"
-                        aria-pressed={isActive}
-                        onClick={() => onSelectSkill(item)}
-                        className={`px-3.5 py-1.5 rounded-full border font-mono text-xs transition-colors focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 ${
-                          isActive
-                            ? 'border-primary bg-primary/10 text-primary shadow-glow'
-                            : 'border-border bg-primary/5 text-ink-muted hover:border-primary/40 hover:text-ink'
-                        }`}
-                      >
-                        {item}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </Reveal>
-          ))}
-        </div>
-
-        {activeSkill && (
-          <p className="font-mono text-xs text-ink-dim mt-6">
-            Filtering projects by{' '}
-            <span className="text-primary">{activeSkill}</span> — tap it again to clear.
-          </p>
-        )}
+    <Section id="skills" eyebrow="02" title="Skills">
+      <div className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
+        {SKILLS.map((s, i) => (
+          <Reveal key={s.name} delay={i * 40}>
+            <div>
+              <div className="flex justify-between mb-1.5">
+                <span className="font-mono text-sm text-ink-900 dark:text-paper">
+                  {s.name}
+                </span>
+                <span className="font-mono text-sm text-gray-500 dark:text-gray-400">
+                  {s.level}%
+                </span>
+              </div>
+              <div className="h-1.5 rounded-full w-full bg-paper-line dark:bg-ink-700">
+                <div
+                  className="h-1.5 rounded-full bg-amber transition-[width] duration-1000 ease-out"
+                  style={{ width: `${s.level}%` }}
+                />
+              </div>
+            </div>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

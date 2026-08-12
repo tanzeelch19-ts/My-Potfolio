@@ -1,85 +1,112 @@
-import { useState } from 'react';
-import Reveal from './Reveal';
-import { GithubIcon, LinkedinIcon, CopyIcon, CheckIcon } from './Icons';
+import { useState } from "react";
+import { Mail, Phone, MapPin, Download, Send } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import Section from "./Section.jsx";
+import { SOCIALS } from "../data/data.js";
 
-const EMAIL = 'tanzeelch19@gmail.com';
+function ContactRow({ icon, label, href }) {
+  const content = (
+    <div className="flex items-center gap-3">
+      <span className="p-2 rounded-md bg-paper dark:bg-ink-700 text-amber">
+        {icon}
+      </span>
+      <span className="text-sm text-ink-900 dark:text-paper">{label}</span>
+    </div>
+  );
+  return href ? (
+    <a
+      href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel="noopener noreferrer"
+      className="block hover:opacity-80 transition-opacity"
+    >
+      {content}
+    </a>
+  ) : (
+    content
+  );
+}
 
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
+  const [formStatus, setFormStatus] = useState(null);
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
-    } catch {
-      // Clipboard API unavailable — the mailto link still works as a fallback.
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    if (!name || !email || !message) {
+      setFormStatus("error");
+      return;
     }
+    const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    window.location.href = `mailto:${SOCIALS.email}?subject=${subject}&body=${body}`;
+    setFormStatus("sent");
   };
 
   return (
-    <section id="contact" className="scroll-mt-19 py-24 md:py-32 border-t border-border bg-bg-alt">
-      <div className="w-full max-w-160 mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-2 font-mono text-sm text-primary mb-4">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-glow" />
-          &lt;contact&gt;
+    <Section id="contact" eyebrow="07" title="Contact">
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-4">
+          <ContactRow icon={<Mail size={16} />} label={SOCIALS.email} href={`mailto:${SOCIALS.email}`} />
+          <ContactRow icon={<Phone size={16} />} label={SOCIALS.phone} href={`tel:${SOCIALS.phone.replace(/\s/g, "")}`} />
+          <ContactRow icon={<MapPin size={16} />} label="Bahawalpur, Punjab, Pakistan" />
+          <ContactRow icon={<FaGithub size={16} />} label="github.com/tanzeelch19-ts" href={SOCIALS.github} />
+          <ContactRow icon={<FaLinkedin size={16} />} label="LinkedIn" href={SOCIALS.linkedin} />
+          <a
+            href="/resume.pdf"
+            className="font-mono text-sm inline-flex items-center gap-2 mt-2 px-4 py-2.5 rounded-md border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper hover:border-amber transition-colors"
+          >
+            <Download size={15} /> Download CV
+          </a>
         </div>
 
-        <Reveal as="h2" className="font-display font-semibold text-[28px] md:text-[40px] mb-4">
-          Let's build something
-        </Reveal>
-
-        <Reveal as="p" className="text-ink-muted text-[17px] max-w-115 mx-auto mb-10">
-          Have a project in mind or just want to say hi? My inbox is open.
-        </Reveal>
-
-        <Reveal as="div" className="flex items-center justify-center gap-3 flex-wrap">
-          <a
-            href={`mailto:${EMAIL}`}
-            className="font-display text-[26px] sm:text-[36px] md:text-[44px] pb-2 border-b-2 border-border-strong hover:text-primary hover:border-primary transition-colors wrap-break-word inline-block"
-          >
-            {EMAIL}
-          </a>
-          <button
-            type="button"
-            onClick={handleCopy}
-            aria-label="Copy email address"
-            className="w-9 h-9 shrink-0 rounded-full border border-border flex items-center justify-center text-ink-muted hover:border-primary hover:text-primary transition-all focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
-          >
-            {copied ? <CheckIcon className="w-3.5 h-3.5 text-primary" /> : <CopyIcon />}
-          </button>
-        </Reveal>
-
-        <p
-          className={`font-mono text-xs text-primary h-4 mt-3 mb-8 transition-opacity duration-200 ${
-            copied ? 'opacity-100' : 'opacity-0'
-          }`}
-          role="status"
+        <form
+          onSubmit={handleSubmit}
+          className="rounded-lg p-5 glass hover-lift"
         >
-          $ copied to clipboard ✓
-        </p>
-
-        <Reveal className="flex justify-center gap-5 mt-11">
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener"
-            aria-label="GitHub"
-            className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-ink-muted hover:border-primary hover:text-primary hover:-translate-y-1 transition-all"
-          >
-            <GithubIcon className="w-4.5 h-4.5" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/ch-tanzeel"
-            target="_blank"
-            rel="noopener"
-            aria-label="LinkedIn"
-            className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-ink-muted hover:border-primary hover:text-primary hover:-translate-y-1 transition-all"
-          >
-            <LinkedinIcon />
-          </a>
-        </Reveal>
+          <p className="font-mono text-xs mb-4 text-gray-500 dark:text-gray-400">
+            <span className="text-amber">$</span> send --message
+          </p>
+          <div className="space-y-3">
+            <input
+              name="name"
+              placeholder="Your name"
+              className="font-mono w-full px-3 py-2.5 rounded-md text-sm outline-none bg-paper dark:bg-ink-700 border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper focus:border-amber transition-colors"
+            />
+            <input
+              name="email"
+              type="email"
+              placeholder="Your email"
+              className="font-mono w-full px-3 py-2.5 rounded-md text-sm outline-none bg-paper dark:bg-ink-700 border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper focus:border-amber transition-colors"
+            />
+            <textarea
+              name="message"
+              placeholder="Your message"
+              rows={4}
+              className="font-mono w-full px-3 py-2.5 rounded-md text-sm outline-none resize-none bg-paper dark:bg-ink-700 border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper focus:border-amber transition-colors"
+            />
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-md font-medium bg-amber text-ink-900 hover:bg-amber-bright transition-colors"
+            >
+              Send Message <Send size={15} />
+            </button>
+            {formStatus === "error" && (
+              <p className="text-xs text-red-500">
+                Please fill in every field before sending.
+              </p>
+            )}
+            {formStatus === "sent" && (
+              <p className="text-xs text-amber">
+                Opening your email app to send this message…
+              </p>
+            )}
+          </div>
+        </form>
       </div>
-    </section>
+    </Section>
   );
 }

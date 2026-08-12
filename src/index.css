@@ -1,59 +1,153 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: #5EEAD4;
-  --color-primary-strong: #2DD4BF;
-  --color-primary-soft: #99F6E4;
+  --color-ink-900: #0b0e14;
+  --color-ink-800: #131826;
+  --color-ink-700: #1b2233;
+  --color-ink-line: #232a3d;
+  --color-paper: #f6f4ee;
+  --color-paper-surface: #ffffff;
+  --color-paper-line: #dfdacb;
 
-  --color-bg: #0D0F16;
-  --color-bg-alt: #11141D;
+  /* accent — violet aurora */
+  --color-amber: #8b5cf6;
+  --color-amber-bright: #a78bfa;
+  --color-amber-dark: #6d28d9;
 
-  --color-surface: #161A24;
-  --color-surface-hover: #1B202C;
-
-  --color-ink: #EEF0F6;
-  --color-ink-muted: #A7ACBD;
-  --color-ink-dim: #6B7086;
-  --color-ink-onprimary: #04211D;
-
-  --color-accent-2: #9B8CFA;
-
-  --color-border: rgba(94, 234, 212, 0.14);
-  --color-border-strong: rgba(94, 234, 212, 0.35);
-
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-
-  --shadow-glow: 0 0 48px rgba(94, 234, 212, 0.16);
-  --shadow-glow-strong: 0 0 64px rgba(94, 234, 212, 0.28);
-  --shadow-card: 0 24px 48px -24px rgba(0, 0, 0, 0.55);
-
-  --animate-blink: blink 1s step-end infinite;
-  --animate-dropline: dropline 1.8s ease-in-out infinite;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: Inter, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+::selection {
+  background: #8b5cf6;
+  color: #ffffff;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #8b5cf6;
+  border-radius: 4px;
+}
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+}
+.reveal.visible {
+  animation: fadeUp 0.6s ease forwards;
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
 @keyframes blink {
-  50% {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
     opacity: 0;
   }
+  100% {
+    opacity: 1;
+  }
 }
 
-@keyframes dropline {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-  50% {
-    transform: scaleY(1);
-    transform-origin: top;
-  }
-  51% {
-    transform: scaleY(1);
-    transform-origin: bottom;
-  }
+/* ---------- floating aurora gradient blobs ---------- */
+.bg-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.4;
+  pointer-events: none;
+  animation: float 16s ease-in-out infinite;
+}
+.dark .bg-blob {
+  opacity: 0.3;
+}
+@keyframes float {
+  0%,
   100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
+    transform: translate(0, 0) scale(1);
   }
+  33% {
+    transform: translate(35px, -45px) scale(1.1);
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.92);
+  }
+}
+
+/* ---------- glass card ---------- */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(223, 218, 201, 0.6);
+}
+.dark .glass {
+  background: rgba(19, 24, 38, 0.55);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+}
+
+/* ---------- tilt card (rises + glows on hover) ---------- */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s ease, border-color 0.35s ease;
+  will-change: transform;
+  cursor: pointer;
+}
+.tilt-card:hover {
+  box-shadow: 0 30px 70px -20px rgba(139, 92, 246, 0.45);
+  border-color: rgba(139, 92, 246, 0.5) !important;
+}
+
+/* ---------- generic hover-lift for non-tilt cards ---------- */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 55px -20px rgba(139, 92, 246, 0.4);
+  border-color: rgba(139, 92, 246, 0.5) !important;
+}
+
+/* ---------- cursor spotlight ---------- */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    500px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(139, 92, 246, 0.18),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
 }

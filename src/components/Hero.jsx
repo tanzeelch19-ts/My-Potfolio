@@ -1,133 +1,97 @@
-import { useEffect, useState } from 'react';
-import useMagnetic from '../hooks/useMagnetic';
+import { useEffect, useRef, useState } from "react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SOCIALS } from "../data/data.js";
 
-const ROLES = ['Frontend Developer', 'UI Engineer', 'Creative Coder'];
-
-function useTypedText(text, speed = 80, startDelay = 0) {
-  const [displayed, setDisplayed] = useState('');
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    let charIndex = 0;
-    let timeoutId;
-
-    const tick = () => {
-      charIndex++;
-      setDisplayed(text.slice(0, charIndex));
-      if (charIndex >= text.length) {
-        setDone(true);
-        return;
-      }
-      timeoutId = setTimeout(tick, speed);
-    };
-
-    timeoutId = setTimeout(tick, startDelay);
-    return () => clearTimeout(timeoutId);
-  }, [text, speed, startDelay]);
-
-  return [displayed, done];
-}
-
-function useTypedRole(startAfter) {
-  const [text, setText] = useState('');
-
-  useEffect(() => {
-    if (!startAfter) return;
-
-    let roleIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-    let timeoutId;
-
-    const tick = () => {
-      const current = ROLES[roleIndex];
-
-      if (!deleting) {
-        charIndex++;
-        if (charIndex > current.length) {
-          deleting = true;
-          timeoutId = setTimeout(tick, 1400);
-          return;
-        }
-      } else {
-        charIndex--;
-        if (charIndex < 0) {
-          deleting = false;
-          roleIndex = (roleIndex + 1) % ROLES.length;
-          charIndex = 0;
-          timeoutId = setTimeout(tick, 300);
-          return;
-        }
-      }
-
-      setText(current.slice(0, charIndex));
-      timeoutId = setTimeout(tick, deleting ? 40 : 80);
-    };
-
-    timeoutId = setTimeout(tick, 300);
-    return () => clearTimeout(timeoutId);
-  }, [startAfter]);
-
-  return text;
-}
+const FULL_NAME = "Ch Tanzeel";
 
 export default function Hero() {
-  const [whoami, whoamiDone] = useTypedText('whoami', 90, 400);
-  const role = useTypedRole(whoamiDone);
-  const magnetPrimary = useMagnetic(0.2);
-  const magnetSecondary = useMagnetic(0.2);
+  const [typed, setTyped] = useState("");
+  const panelRef = useRef(null);
+
+  useEffect(() => {
+    let i = 0;
+    const t = setInterval(() => {
+      i++;
+      setTyped(FULL_NAME.slice(0, i));
+      if (i >= FULL_NAME.length) clearInterval(t);
+    }, 90);
+    return () => clearInterval(t);
+  }, []);
+
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleMouseMove = (e) => {
+    const el = panelRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty("--spot-x", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--spot-y", `${e.clientY - rect.top}px`);
+  };
 
   return (
-    <header
+    <section
       id="home"
-      className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-19"
+      className="max-w-6xl mx-auto px-4 pt-16 pb-24 md:pt-24 md:pb-32"
     >
-      <div className="pointer-events-none absolute -top-24 -right-24 w-140 h-140 rounded-full bg-primary/10 blur-3xl" />
+      <div
+        ref={panelRef}
+        onMouseMove={handleMouseMove}
+        className="spotlight rounded-xl p-6 md:p-10 glass shadow-xl"
+      >
+        <p className="font-mono text-sm mb-4 text-gray-500 dark:text-gray-400 relative z-10">
+          <span className="text-amber">~/portfolio</span> $ whoami
+        </p>
+        <h1 className="font-display text-4xl md:text-6xl font-bold leading-tight text-ink-900 dark:text-paper relative z-10">
+          {typed}
+          <span className="text-amber animate-blink">_</span>
+        </h1>
+        <p className="font-mono text-lg md:text-xl mt-3 text-amber relative z-10">
+          Frontend Developer / React Developer
+        </p>
+        <p className="max-w-2xl mt-5 text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-400 relative z-10">
+          I build clean, responsive web interfaces with React and modern
+          tooling — turning ideas into fast, usable products from Bahawalpur,
+          Pakistan.
+        </p>
 
-      <div className="w-full max-w-280 mx-auto px-6 relative">
-        <div className="max-w-190">
-          <p className="font-mono text-sm text-ink-muted mb-5">
-            <span className="text-primary">Ch Tanzeel@portfolio:~$</span> {whoami}
-            <span className="inline-block w-2 h-3.75 -mb-0.5 ml-0.5 bg-primary animate-blink" />
-          </p>
-
-          <h1 className="font-display font-semibold text-[40px] sm:text-[56px] md:text-[76px] leading-[1.05] tracking-tight mb-4">
-            Ch Tanzeel
-          </h1>
-
-          <p className="font-mono text-primary text-lg md:text-2xl min-h-8 mb-6">
-            {role}
-            <span className="inline-block w-0.5 h-5.5 -mb-1 ml-1 bg-primary animate-blink" />
-          </p>
-
-          <p className="text-ink-muted text-lg max-w-135 mb-9">
-            I build clean, functional web interfaces with HTML, CSS,
-            JavaScript, and React — turning ideas into real, usable projects.
-          </p>
-
-          <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap items-center gap-3 mt-8 relative z-10">
+          <button
+            onClick={() => scrollTo("projects")}
+            className="px-5 py-2.5 rounded-md font-medium bg-amber text-ink-900 hover:bg-amber-bright hover:shadow-[0_0_25px_-5px_rgba(232,163,61,0.6)] transition-all"
+          >
+            View Projects
+          </button>
+          <button
+            onClick={() => scrollTo("contact")}
+            className="px-5 py-2.5 rounded-md font-medium border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper hover:border-amber transition-colors"
+          >
+            Contact Me
+          </button>
+          <div className="flex items-center gap-3 ml-1">
             <a
-              ref={magnetPrimary}
-              href="#projects"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm bg-primary text-ink-onprimary shadow-glow hover:bg-primary-soft hover:shadow-glow-strong transition-transform duration-150"
+              href={SOCIALS.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="p-2.5 rounded-md border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper hover:text-amber hover:border-amber transition-colors"
             >
-              View projects
+              <FaGithub size={18} />
             </a>
             <a
-              ref={magnetSecondary}
-              href="#contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm border border-border-strong text-ink hover:border-primary hover:text-primary transition-transform duration-150"
+              href={SOCIALS.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="p-2.5 rounded-md border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper hover:text-amber hover:border-amber transition-colors"
             >
-              Get in touch
+              <FaLinkedin size={18} />
             </a>
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-9 left-6 flex items-center gap-2.5 font-mono text-xs text-ink-dim">
-        <span className="w-px h-7 bg-linear-to-b from-primary to-transparent animate-dropline" />
-        scroll
-      </div>
-    </header>
+    </section>
   );
 }
