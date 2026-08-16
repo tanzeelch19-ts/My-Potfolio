@@ -74,8 +74,8 @@ export const ALL_TAGS = [
 
 
 export const CERTIFICATIONS = [
-  "[Add a relevant course or certification]",
-  "[Add another certification]",
+  "React - The Complete Guide (Udemy)",
+  "JavaScript Algorithms and Data Structures (freeCodeCamp)",
 ];
 
 export const EXPERIENCE = [
