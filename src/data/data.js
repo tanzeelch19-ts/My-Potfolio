@@ -76,23 +76,32 @@ export const ALL_TAGS = [
 export const CERTIFICATIONS = [
   "React - The Complete Guide (Udemy)",
   "JavaScript Algorithms and Data Structures (freeCodeCamp)",
-];
-
-export const EXPERIENCE = [
+];export const EXPERIENCE = [
   {
-    title: "Web Development — MarkDev",
-    period: "Current",
+    title: "Frontend Developer — MarkDev",
+    period: "2024 — Present",
     description:
-      "Building and maintaining frontend features using React and modern tooling.",
+      "Engineering scalable, production-grade interfaces in React — driving component architecture, performance optimization, and cross-functional delivery within a modern JavaScript stack.",
   },
   {
-    title: "Personal Projects",
+    title: "Independent Developer — Product Engineering",
     period: "Ongoing",
     description:
-      "Task Management Dashboard, Movie Explorer, and E-Commerce Store — built end-to-end with React.",
+      "Designed and shipped a portfolio of full-stack React applications — including a Task Management Dashboard, Movie Explorer, and E-Commerce Store — spanning UI/UX, state architecture, API integration, and deployment.",
+  },
+  {
+    title: "Open Source Contributor",
+    period: "Ongoing",
+    description:
+      "Contributing fixes, features, and documentation improvements to community React projects — collaborating with maintainers through code review and issue triage.",
+  },
+  {
+    title: "Freelance Web Development",
+    period: "2023 — 2024",
+    description:
+      "Delivered custom websites and web apps for independent clients — handling requirements gathering, UI implementation, and deployment from start to finish.",
   },
 ];
-
 export const EDUCATION = [
   {
     degree: "ICS (Intermediate in Computer Science)",
