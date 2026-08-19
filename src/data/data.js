@@ -2,6 +2,7 @@
 import taskImg from "../assets/task-management.png";
 import movieImg from "../assets/movieBox.png";
 import ecommerceImg from "../assets/ecommerce-cart.png";
+import ecommerceImg from "../assets/weather.png";
 
 export const NAV_LINKS = [
   { id: "home", label: "Home" },
