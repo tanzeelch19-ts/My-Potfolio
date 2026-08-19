@@ -2,7 +2,7 @@
 import taskImg from "../assets/task-management.png";
 import movieImg from "../assets/movieBox.png";
 import ecommerceImg from "../assets/ecommerce-cart.png";
-import ecommerceImg from "../assets/weather.png";
+import weather from "../assets/weather.png";
 
 export const NAV_LINKS = [
   { id: "home", label: "Home" },
@@ -43,7 +43,7 @@ export const PROJECTS = [
       "A task manager for organizing work into boards, tracking progress, and staying on top of deadlines.",
     tech: ["React", "Tailwind CSS", "LocalStorage"],
     github: SOCIALS.github,
-    demo: "https://task-management-code.netlify.app/",
+    demo: "https://task-management-code.netlify.app",
   },
   {
     id: 2,
@@ -53,7 +53,7 @@ export const PROJECTS = [
       "Search and browse movies with live data from the OMDB API — posters, ratings, and details at a glance.",
     tech: ["React", "REST APIs", "CSS"],
     github: SOCIALS.github,
-    demo: "https://movie-box-code.netlify.app/",
+    demo: "https://movie-box-code.netlify.app",
   },
   {
     id: 3,
@@ -63,7 +63,7 @@ export const PROJECTS = [
       "A shopping experience with product listings, cart management, and a smooth checkout flow.",
     tech: ["React", "Tailwind CSS", "React Router"],
     github: SOCIALS.github,
-    demo: "https://e-commerence-code.netlify.app/",
+    demo: "https://e-commerence-code.netlify.app",
   },
   {
   id: "weather-project",
@@ -71,8 +71,8 @@ export const PROJECTS = [
   description: "A weather forecasting app that shows real-time conditions and forecasts based on location.",
   tech: ["React", "API", "JavaScript"],
   image: "/images/weather-project.png",
-  github: "https://github.com/yourusername/weather-project",
-  demo: "https://weather-project-rho-smoky.vercel.app/",
+  github: SOCIALS.github,
+  demo: "https://weather-project-rho-smoky.vercel.app",
 },
 ];
 
