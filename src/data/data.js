@@ -70,7 +70,7 @@ export const PROJECTS = [
   name: "Weather App",
   description: "A weather forecasting app that shows real-time conditions and forecasts based on location.",
   tech: ["React", "API", "JavaScript"],
-  image: "/images/weather-project.png",
+  image: weather,
   github: SOCIALS.github,
   demo: "https://weather-project-rho-smoky.vercel.app",
 },
