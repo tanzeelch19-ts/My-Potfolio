@@ -64,6 +64,15 @@ export const PROJECTS = [
     github: SOCIALS.github,
     demo: "https://e-commerence-code.netlify.app/",
   },
+  {
+  id: "weather-project",
+  name: "Weather App",
+  description: "A weather forecasting app that shows real-time conditions and forecasts based on location.",
+  tech: ["React", "API", "JavaScript"],
+  image: "/images/weather-project.png",
+  github: "https://github.com/yourusername/weather-project",
+  demo: "https://weather-project-rho-smoky.vercel.app/",
+},
 ];
 
 export const ALL_TAGS = [
