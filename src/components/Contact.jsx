@@ -102,13 +102,29 @@ export default function Contact() {
             href={SOCIALS.github}
           />
           <ContactRow icon={<FaLinkedin size={16} />} label="LinkedIn" href={SOCIALS.linkedin} />
-<a
-          
-            href="/resume.pdf"
+
+          <button
+            type="button"
+            onClick={async () => {
+              try {
+                const res = await fetch("/resume.pdf");
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "Tanzeel-Ahmad-CV.pdf";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+              } catch {
+                window.open("/resume.pdf", "_blank");
+              }
+            }}
             className="font-mono text-sm inline-flex items-center gap-2 mt-2 px-4 py-2.5 rounded-md border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper hover:border-amber hover:text-amber transition-colors"
           >
             <Download size={15} /> Download CV
-          </a>
+          </button>
         </div>
 
         <form onSubmit={handleSubmit} className="rounded-lg p-5 glass hover-lift">
