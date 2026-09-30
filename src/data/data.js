@@ -3,6 +3,7 @@ import taskImg from "../assets/task-management.png";
 import movieImg from "../assets/movieBox.png";
 import ecommerceImg from "../assets/ecommerce-cart.png";
 import weather from "../assets/weather.png";
+import ticTacToeImg from "../assets/tic-tac-toe.png";
 
 export const NAV_LINKS = [
   { id: "home", label: "Home" },
@@ -66,14 +67,25 @@ export const PROJECTS = [
     demo: "https://e-commerence-code.netlify.app",
   },
   {
-  id: "weather-project",
-  name: "Weather App",
-  description: "A weather forecasting app that shows real-time conditions and forecasts based on location.",
-  tech: ["React", "API", "JavaScript"],
-  image: weather,
-  github: SOCIALS.github,
-  demo: "https://weather-project-rho-smoky.vercel.app",
-},
+    id: 4,
+    image: weather,
+    name: "Weather App",
+    description:
+      "A weather forecasting app that shows real-time conditions and forecasts based on location.",
+    tech: ["React", "REST APIs", "JavaScript"],
+    github: SOCIALS.github,
+    demo: "https://weather-project-rho-smoky.vercel.app",
+  },
+  {
+    id: 5,
+    image: ticTacToeImg,
+    name: "Tic-Tac-Toe",
+    description:
+      "Two-player Tic-Tac-Toe with win and draw detection, a saved scoreboard, keyboard controls, and a light/dark theme.",
+    tech: ["React", "Tailwind CSS", "JavaScript"],
+    github: SOCIALS.github,
+    demo: "https://tic-tac-toe-myproject.vercel.app",
+  },
 ];
 
 export const ALL_TAGS = [
@@ -81,12 +93,12 @@ export const ALL_TAGS = [
   ...Array.from(new Set(PROJECTS.flatMap((p) => p.tech))),
 ];
 
-
-
 export const CERTIFICATIONS = [
   "React - The Complete Guide (Udemy)",
   "JavaScript Algorithms and Data Structures (freeCodeCamp)",
-];export const EXPERIENCE = [
+];
+
+export const EXPERIENCE = [
   {
     title: "Frontend Developer — MarkDev",
     period: "2024 — Present",
@@ -112,6 +124,7 @@ export const CERTIFICATIONS = [
       "Delivered custom websites and web apps for independent clients — handling requirements gathering, UI implementation, and deployment from start to finish.",
   },
 ];
+
 export const EDUCATION = [
   {
     degree: "ICS (Intermediate in Computer Science)",

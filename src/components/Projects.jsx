@@ -31,6 +31,8 @@ export default function Projects() {
           return (
             <button
               key={tag}
+              type="button"
+              aria-pressed={active}
               onClick={() => setActiveFilter(tag)}
               className={`font-mono text-xs px-3 py-1.5 rounded-full border transition-all duration-200 flex items-center gap-1.5 ${
                 active
@@ -78,6 +80,8 @@ export default function Projects() {
                   <img
                     src={p.image}
                     alt={`${p.name} screenshot`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-top"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -116,6 +120,7 @@ export default function Projects() {
                       href={p.github}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${p.name} source code on GitHub`}
                       className="font-mono text-xs px-3 py-2 rounded-md flex items-center gap-1.5 border border-paper-line dark:border-ink-line text-ink-900 dark:text-paper hover:border-amber hover:text-amber transition-colors"
                     >
                       <FaGithub size={14} /> GitHub
@@ -124,6 +129,7 @@ export default function Projects() {
                       href={p.demo}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${p.name} live demo`}
                       className="font-mono text-xs px-3 py-2 rounded-md flex items-center gap-1.5 bg-amber text-ink-900 hover:bg-amber-bright transition-colors"
                     >
                       Live Demo <ExternalLink size={14} />
