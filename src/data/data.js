@@ -4,6 +4,7 @@ import movieImg from "../assets/movieBox.png";
 import ecommerceImg from "../assets/ecommerce-cart.png";
 import weather from "../assets/weather.png";
 import ticTacToeImg from "../assets/tic-tac-toe.png";
+import devaiImg from "../assets/devai.png";
 
 export const NAV_LINKS = [
   { id: "home", label: "Home" },
@@ -85,6 +86,16 @@ export const PROJECTS = [
     tech: ["React", "Tailwind CSS", "JavaScript"],
     github: SOCIALS.github,
     demo: "https://tic-tac-toe-myproject.vercel.app",
+  },
+  {
+    id: 6,
+    image: devaiImg,
+    name: "DevAI — AI Chat Assistant",
+    description:
+      "A ChatGPT-style AI chat app with streaming replies, saved chat history, image analysis, and automatic switching between Claude, Gemini and GPT models so a chat never stops.",
+    tech: ["React", "Tailwind CSS", "REST APIs", "JavaScript"],
+    github: SOCIALS.github,
+    demo: "https://ai-modal-1.vercel.app",
   },
 ];
 
