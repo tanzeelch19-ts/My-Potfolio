@@ -5,6 +5,7 @@ import ecommerceImg from "../assets/ecommerce-cart.png";
 import weather from "../assets/weather.png";
 import ticTacToeImg from "../assets/tic-tac-toe.png";
 import devaiImg from "../assets/devai.png";
+import tripnestImg from "../assets/tripnest.png";
 
 export const NAV_LINKS = [
   { id: "home", label: "Home" },
@@ -96,6 +97,16 @@ export const PROJECTS = [
     tech: ["React", "Tailwind CSS", "REST APIs", "JavaScript"],
     github: SOCIALS.github,
     demo: "https://ai-modal-1.vercel.app",
+  },
+  {
+    id: 7,
+    image: tripnestImg,
+    name: "TripNest — Stays Booking",
+    description:
+      "A full stays-booking website with destination search, live hotel and photo APIs, a wishlist, side-by-side stay comparison, trip pages with calendar export and printable tickets, and user accounts with profile and settings.",
+    tech: ["React", "Tailwind CSS", "React Router", "REST APIs", "LocalStorage"],
+    github: SOCIALS.github,
+    demo: "https://tripnest-project.vercel.app",
   },
 ];
 
