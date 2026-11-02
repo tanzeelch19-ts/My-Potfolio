@@ -6,6 +6,7 @@ import weather from "../assets/weather.png";
 import ticTacToeImg from "../assets/tic-tac-toe.png";
 import devaiImg from "../assets/devai.png";
 import tripnestImg from "../assets/tripnest.png";
+import taskflowImg from "../assets/taskflow-dashboard.png";
 
 export const NAV_LINKS = [
   { id: "home", label: "Home" },
@@ -107,6 +108,16 @@ export const PROJECTS = [
     tech: ["React", "Tailwind CSS", "React Router", "REST APIs", "LocalStorage"],
     github: SOCIALS.github,
     demo: "https://tripnest-project.vercel.app",
+  },
+  {
+    id: 8,
+    image: taskflowImg,
+    name: "TaskFlow — Project & Task Dashboard",
+    description:
+      "A project and task management dashboard with progress tracking, search, filters and sorting, validated task forms, CSV export, and a responsive layout. Works with localStorage or a REST API.",
+    tech: ["React", "Tailwind CSS", "React Router", "REST APIs", "LocalStorage"],
+    github: "https://github.com/tanzeelch19-ts/task-managment-dashboard",
+    demo: "https://task-managment-dashboard-murex.vercel.app/",
   },
 ];
 
